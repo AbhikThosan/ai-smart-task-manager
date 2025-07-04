@@ -1,67 +1,248 @@
-AI Smart Task Manager
+# AI Smart Task Manager
 
 AI Smart Task Manager is a modern, responsive task management application built with Next.js 15+, TypeScript, and Ant Design, leveraging the Google Gemini API for AI-powered subtask suggestions. Designed for simplicity and efficiency, it allows users to create, edit, delete, and manage tasks with a clean, user-friendly interface that works seamlessly on both mobile and desktop devices. The app prioritizes quality, robust error handling, and a lightweight architecture, making it ideal for personal productivity.
 
-Features
+## 🌐 Live Demo
 
-Task Management: Add, edit, and delete tasks with fields for title, description, status (pending/completed), and due date.
+🔗 **[Try AI Smart Task Manager Live](https://ai-smart-task-manager-2gyu.vercel.app/)**
 
-AI Subtask Suggestions: Click the "Suggest Subtasks" button to generate 3-5 actionable subtasks using the Google Gemini API (e.g., "Plan birthday party" → "Book venue, Send invitations, Order cake").
+## 🚀 Features
 
-Responsive Design: Built with Ant Design and Tailwind CSS for a polished, mobile-friendly experience.
+### Core Task Management
 
-Error Handling: Comprehensive error boundaries and user feedback for API failures (e.g., Gemini API errors) and task operations.
+- ✅ **Add/Edit/Delete tasks** with full CRUD operations
+- ✅ **Task fields**: Title, description, status (pending/completed), due date
+- ✅ **Responsive design** that works seamlessly on mobile and desktop
+- ✅ **Real-time updates** with Redux state management
+- ✅ **Data persistence** using Redux Persist
 
-Type-Safe: Fully written in TypeScript for reliable, maintainable code.
+### AI-Powered Subtask Suggestions
 
-Tech Stack
+- 🤖 **"Suggest Subtasks" button** on each task
+- 🧠 **Google Gemini AI integration** for intelligent task breakdown
+- 📋 **3-5 actionable subtasks** generated per task
+- 🔄 **Fallback suggestions** when AI is unavailable
+- ⚡ **Real-time generation** with loading states
 
-Next.js 15+ (App Router): Utilizes React Server Components, Server Actions, and optimized caching for efficient data handling.
+### User Experience
 
-TypeScript: Ensures type safety across the app.
+- 🎨 **Modern UI** with Ant Design components
+- 📱 **Mobile-first responsive design**
+- 🌈 **Beautiful gradients**
+- ⚠️ **Error handling** with graceful fallbacks
+- 🔄 **Loading states** and skeleton screens
 
-Ant Design: Provides a clean, responsive UI with components like forms, modals, and cards.
+## 🛠️ Technologies Used
 
-React Context: Manages task state without the overhead of Redux.
+### Frontend
 
-Google Gemini API: Powers AI-driven subtask suggestions via a secure Next.js API route.
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **React 19** - Latest React features
+- **Ant Design** - UI component library
+- **Tailwind CSS** - Utility-first CSS framework
 
-Setup
+### State Management
 
-Clone the repository: git clone <repo-url>
+- **Redux Toolkit** - Modern Redux with RTK
+- **Redux Persist** - Data persistence
+- **React Redux** - React bindings
 
-Install dependencies: npm install
+### AI Integration
 
-Copy .env.example to .env.local and add your Google Gemini API key from AI Studio.
+- **Google Gemini API** - AI-powered subtask generation
+- **Next.js API Routes** - Backend API endpoints
 
-Run the app: npm run dev
+### Development Tools
 
-Project Structure
+- **ESLint** - Code linting
+- **PostCSS** - CSS processing
+- **Day.js** - Date manipulation
+- **React Hot Toast** - Notifications
+- **UUID** - Unique ID generation
 
-Organized for scalability:
+## 📁 Project Structure
 
-src/app/: Next.js App Router with pages and API routes.
+```
+ai-smart-task-manager/
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/               # API routes
+│   │   │   └── suggest-subtasks/
+│   │   │       └── route.ts   # Gemini AI integration
+│   │   ├── globals.css        # Global styles
+│   │   ├── layout.tsx         # Root layout
+│   │   ├── page.tsx           # Home page
+│   │   └── providers.tsx      # Redux providers
+│   ├── components/
+│   │   ├── layout/            # Layout components
+│   │   │   ├── Header.tsx
+│   │   │   ├── HeaderActions.tsx
+│   │   │   └── HeaderTitle.tsx
+│   │   ├── tasks/             # Task-related components
+│   │   │   ├── TaskCard.tsx
+│   │   │   ├── TaskActions.tsx
+│   │   │   ├── TaskCheckbox.tsx
+│   │   │   ├── TaskDetails.tsx
+│   │   │   ├── TaskFormActions.tsx
+│   │   │   ├── TaskFormFields.tsx
+│   │   │   ├── TaskFormModal.tsx
+│   │   │   ├── TaskList.tsx
+│   │   │   ├── TaskSection.tsx
+│   │   │   ├── SuggestSubtasksButton.tsx
+│   │   │   └── SubtasksList.tsx
+│   │   └── ui/                # Reusable UI components
+│   │       ├── ClientOnly.tsx
+│   │       ├── ErrorBoundary.tsx
+│   │       ├── HydrationSafe.tsx
+│   │       ├── LoadingSpinner.tsx
+│   │       ├── NoSSR.tsx
+│   │       └── NoTasksPlaceholder.tsx
+│   ├── hooks/                 # Custom React hooks
+│   │   ├── useTasks.ts
+│   │   └── useUI.ts
+│   ├── store/                 # Redux store
+│   │   ├── index.ts
+│   │   └── slices/
+│   │       ├── taskSlice.ts
+│   │       └── uiSlice.ts
+│   └── types/                 # TypeScript type definitions
+│       └── task.ts
+├── public/                    # Static assets
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-src/components/: Reusable UI components (TaskCard, TaskForm, etc.).
+## 🚀 Getting Started
 
-src/context/: TaskContext for state management.
+### Prerequisites
 
-src/lib/types/: TypeScript type definitions.
+- Node.js 18+
+- npm, yarn, or pnpm
+- Google Gemini API key
 
-Error Handling
+### Installation
 
-Graceful handling of Gemini API failures with user-friendly messages.
+1. **Clone the repository**
 
-Error boundaries in src/app/tasks/error.tsx catch rendering issues.
+   ```bash
+   git clone https://github.com/AbhikThosan/ai-smart-task-manager.git
+   cd ai-smart-task-manager
+   ```
 
-Form validation and mutation errors are managed with Ant Design’s message component.
+2. **Install dependencies**
 
-Future Improvements
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
 
-Add a database for persistent storage.
+3. **Set up environment variables**
 
-Implement user authentication.
+   ```bash
+   cp .env.example .env.local
+   ```
 
-Enhance AI features with more advanced prompts.
+   Add your Gemini API key to `.env.local`:
 
-Explore the code and contribute to make task management smarter!
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+4. **Get a Gemini API key**
+
+   - Visit [Google AI Studio](https://aistudio.google.com/app/apikey)
+   - Create a new API key
+   - Copy the key to your `.env.local` file
+
+5. **Run the development server**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🔧 Environment Variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+# Required: Google Gemini API Key
+GEMINI_API_KEY=your_gemini_api_key_here
+
+```
+
+## 📱 Usage
+
+### Creating Tasks
+
+1. Click the "Add New Task" button in the header
+2. Fill in the task title and description
+3. Optionally set a due date
+4. Click "Create Task"
+
+### AI Subtask Suggestions
+
+1. Click the "Suggest Subtasks" button on any task
+2. Wait for AI to generate 3-5 actionable subtasks
+3. Review and use the suggested subtasks
+
+### Managing Tasks
+
+- **Edit**: Click the edit icon on any task
+- **Delete**: Click the delete icon and confirm
+- **Complete**: Check the checkbox to mark as completed
+- **Filter**: Use the task filters to organize your view
+
+## 🧪 Testing Examples
+
+### Sample Task for Testing
+
+- **Title**: "Prepare for job interview"
+- **Description**: "Technical interview for React developer position"
+
+### Expected AI Suggestions
+
+- Research company
+- Practice coding questions
+- Prepare questions to ask
+- Review resume
+- Choose appropriate outfit
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Gemini API not working**
+
+   - Verify your API key is correct
+   - Check if you have sufficient quota
+   - Ensure the API key is in `.env.local`
+
+2. **Tasks not persisting**
+
+   - Check browser storage permissions
+   - Clear browser cache and try again
+
+3. **Build errors**
+   - Delete `node_modules` and reinstall
+   - Clear Next.js cache: `rm -rf .next`
+
+### Error Handling
+
+The application includes comprehensive error handling:
+
+- Network errors with retry mechanisms
+- API timeout handling (30 seconds)
+- Graceful fallbacks for AI failures
+- User-friendly error messages
