@@ -10,11 +10,11 @@ import "@ant-design/v5-patch-for-react-19";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Smart Task Manager",
+  title: "AI Smart Task Manager",
   description:
     "AI-powered task management application with intelligent subtask suggestions",
   keywords: ["task management", "AI", "productivity", "Gemini", "Next.js"],
-  authors: [{ name: "Smart Task Manager Team" }],
+  authors: [{ name: "AI Smart Task Manager Team" }],
 };
 
 export async function generateViewport() {
