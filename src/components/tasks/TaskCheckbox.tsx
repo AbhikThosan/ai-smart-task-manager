@@ -17,7 +17,7 @@ export function TaskCheckbox({ task }: TaskCheckboxProps) {
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center gap-2">
       <Checkbox
         checked={task.status === "completed"}
         onChange={handleToggleStatus}

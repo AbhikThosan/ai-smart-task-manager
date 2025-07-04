@@ -31,6 +31,7 @@ const taskSlice = createSlice({
         description: action.payload.description,
         status: TaskStatus.PENDING,
         dueDate: action.payload.dueDate,
+        subtasks: [],
         createdAt: now,
         updatedAt: now,
       };
@@ -86,6 +87,17 @@ const taskSlice = createSlice({
         (task) => task.status !== TaskStatus.COMPLETED
       );
     },
+    updateSubtasks: (
+      state,
+      action: PayloadAction<{ id: string; subtasks: string[] }>
+    ) => {
+      const { id, subtasks } = action.payload;
+      const taskIndex = state.tasks.findIndex((task) => task.id === id);
+      if (taskIndex !== -1) {
+        state.tasks[taskIndex].subtasks = subtasks;
+        state.tasks[taskIndex].updatedAt = new Date().toISOString();
+      }
+    },
   },
 });
 
@@ -101,6 +113,7 @@ export const {
   clearError,
   clearAllTasks,
   clearCompletedTasks,
+  updateSubtasks,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

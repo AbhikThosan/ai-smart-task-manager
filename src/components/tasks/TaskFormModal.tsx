@@ -56,8 +56,10 @@ export function TaskFormModal() {
       open={isOpen}
       onCancel={handleCancel}
       footer={null}
-      width={600}
+      width="90vw"
+      style={{ maxWidth: 600 }}
       destroyOnHidden
+      className="sm:max-w-lg md:max-w-xl lg:max-w-2xl"
     >
       <Form
         layout="vertical"

@@ -14,11 +14,11 @@ export function TaskFormActions() {
   };
 
   return (
-    <div className="flex justify-end space-x-2">
-      <Button onClick={handleCancel} className="mr-2">
+    <div className="flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-2 gap-2">
+      <Button onClick={handleCancel} className="order-2 sm:order-1">
         Cancel
       </Button>
-      <Button type="primary" htmlType="submit">
+      <Button type="primary" htmlType="submit" className="order-1 sm:order-2">
         {isEditing ? "Update Task" : "Create Task"}
       </Button>
     </div>

@@ -4,6 +4,7 @@ export interface Task {
   description: string;
   status: TaskStatus;
   dueDate: string | null;
+  subtasks: string[];
   createdAt: string;
   updatedAt: string;
 }

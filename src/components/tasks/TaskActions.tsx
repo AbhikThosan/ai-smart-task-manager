@@ -30,15 +30,25 @@ export function TaskActions({ task }: TaskActionsProps) {
   };
 
   return (
-    <div className="flex space-x-2">
-      <Button icon={<EditOutlined />} size="small" onClick={handleEdit} />
+    <div className="flex space-x-1 sm:space-x-2">
+      <Button
+        icon={<EditOutlined />}
+        size="small"
+        onClick={handleEdit}
+        className="text-xs sm:text-sm"
+      />
       <Popconfirm
         title="Are you sure you want to delete this task?"
         onConfirm={handleDelete}
         okText="Yes"
         cancelText="No"
       >
-        <Button icon={<DeleteOutlined />} size="small" danger />
+        <Button
+          icon={<DeleteOutlined />}
+          size="small"
+          danger
+          className="text-xs sm:text-sm"
+        />
       </Popconfirm>
     </div>
   );
