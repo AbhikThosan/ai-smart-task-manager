@@ -4,7 +4,6 @@ import { Row, Col } from "antd";
 import { useAppSelector } from "@/store";
 import { selectFilteredTasks } from "@/store/slices/taskSlice";
 import { TaskCard } from "./TaskCard";
-import { TaskFilters } from "./TaskFilters";
 import { NoTasksPlaceholder } from "@/components/ui/NoTasksPlaceholder";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
@@ -13,8 +12,6 @@ export function TaskList() {
 
   return (
     <div className="space-y-6">
-      <TaskFilters />
-
       {filteredTasks.length === 0 ? (
         <NoTasksPlaceholder isFiltered={true} />
       ) : (

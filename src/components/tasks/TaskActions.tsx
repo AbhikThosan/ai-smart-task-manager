@@ -1,11 +1,12 @@
 "use client";
 
-import { Button, Popconfirm, message } from "antd";
+import { Button, Popconfirm } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useAppDispatch } from "@/store";
 import { deleteTask } from "@/store/slices/taskSlice";
 import { Task } from "@/types/task";
 import { openTaskForm } from "@/store/slices/uiSlice";
+import toast from "react-hot-toast";
 
 interface TaskActionsProps {
   task: Task;
@@ -17,10 +18,10 @@ export function TaskActions({ task }: TaskActionsProps) {
   const handleDelete = () => {
     try {
       dispatch(deleteTask(task.id));
-      message.success("Task deleted successfully");
+      toast.success("Task deleted successfully");
     } catch (error) {
       console.error("Delete error:", error);
-      message.error("Failed to delete task");
+      toast.error("Failed to delete task");
     }
   };
 

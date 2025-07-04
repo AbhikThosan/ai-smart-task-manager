@@ -14,7 +14,6 @@ import { addTask, updateTask } from "@/store/slices/taskSlice";
 import { TaskFormData, Task } from "@/types/task";
 import dayjs, { Dayjs } from "dayjs";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
 import { selectTasks } from "@/store/slices/taskSlice";
 
 interface TaskFormValues {
@@ -29,41 +28,12 @@ export function TaskFormModal() {
   const editingTaskId = useAppSelector(selectEditingTaskId);
   const tasks = useAppSelector(selectTasks);
   const editingTask = tasks.find((task: Task) => task.id === editingTaskId);
-  const [form] = Form.useForm<TaskFormValues>();
-
-  useEffect(() => {
-    if (editingTask) {
-      const formValues: TaskFormValues = {
-        title: editingTask.title,
-        description: editingTask.description,
-        dueDate:
-          editingTask.dueDate && editingTask.dueDate !== null
-            ? dayjs(editingTask.dueDate)
-            : null,
-      };
-
-      console.log("Form values:", formValues);
-      console.log("Due date dayjs object:", formValues.dueDate);
-      console.log(
-        "Is valid dayjs?",
-        formValues.dueDate ? dayjs.isDayjs(formValues.dueDate) : "null"
-      );
-
-      form.setFieldsValue(formValues);
-    } else {
-      form.resetFields();
-    }
-  }, [editingTask, form]);
 
   const handleCancel = () => {
-    form.resetFields();
     dispatch(closeTaskForm());
   };
 
   const handleSubmit = (values: TaskFormValues) => {
-    console.log("Form submission values:", values);
-    console.log("Due date from form:", values.dueDate);
-
     const taskData: TaskFormData = {
       title: values.title,
       description: values.description,
@@ -77,7 +47,6 @@ export function TaskFormModal() {
       dispatch(addTask(taskData));
       toast.success("Task created successfully!");
     }
-    form.resetFields();
     dispatch(closeTaskForm());
   };
 
@@ -88,17 +57,30 @@ export function TaskFormModal() {
       onCancel={handleCancel}
       footer={null}
       width={600}
-      destroyOnClose
+      destroyOnHidden
     >
       <Form
-        form={form}
         layout="vertical"
         onFinish={handleSubmit}
-        onFinishFailed={(errorInfo) => console.log("Form failed:", errorInfo)}
+        onFinishFailed={() => {}}
         className="mt-4"
+        initialValues={
+          editingTask
+            ? {
+                title: editingTask.title,
+                description: editingTask.description,
+                dueDate:
+                  editingTask.dueDate && editingTask.dueDate !== null
+                    ? dayjs(editingTask.dueDate)
+                    : null,
+              }
+            : undefined
+        }
       >
         <TaskFormFields />
-        <TaskFormActions form={form} />
+        <Form.Item className="mb-0">
+          <TaskFormActions />
+        </Form.Item>
       </Form>
     </Modal>
   );

@@ -9,6 +9,7 @@ import { TaskFormModal } from "@/components/tasks/TaskFormModal";
 import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { TaskSection } from "@/components/tasks/TaskSection";
+import { HydrationSafe } from "@/components/ui/HydrationSafe";
 
 const { Content } = Layout;
 
@@ -31,22 +32,24 @@ export default function HomePage() {
               Organize your tasks with AI-powered subtask suggestions
             </p>
           </div>
-          <ErrorBoundary
-            fallback={<div>Something went wrong loading tasks</div>}
-          >
-            <Suspense fallback={<LoadingSpinner />}>
-              <TaskSection
-                title="Pending Tasks"
-                tasks={pendingTasks}
-                count={pendingTasks.length}
-              />
-              <TaskSection
-                title="Completed Tasks"
-                tasks={completedTasks}
-                count={completedTasks.length}
-              />
-            </Suspense>
-          </ErrorBoundary>
+          <HydrationSafe fallback={<LoadingSpinner />}>
+            <ErrorBoundary
+              fallback={<div>Something went wrong loading tasks</div>}
+            >
+              <Suspense fallback={<LoadingSpinner />}>
+                <TaskSection
+                  title="Pending Tasks"
+                  tasks={pendingTasks}
+                  count={pendingTasks.length}
+                />
+                <TaskSection
+                  title="Completed Tasks"
+                  tasks={completedTasks}
+                  count={completedTasks.length}
+                />
+              </Suspense>
+            </ErrorBoundary>
+          </HydrationSafe>
           <TaskFormModal />
         </div>
       </Content>

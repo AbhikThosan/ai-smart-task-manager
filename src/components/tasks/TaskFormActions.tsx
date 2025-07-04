@@ -1,30 +1,26 @@
 "use client";
 
 import { Button } from "antd";
-import { useAppDispatch } from "@/store";
-import { closeTaskForm } from "@/store/slices/uiSlice";
-import { Form, FormInstance } from "antd"; 
+import { useAppDispatch, useAppSelector } from "@/store";
+import { closeTaskForm, selectEditingTaskId } from "@/store/slices/uiSlice";
 
-interface TaskFormActionsProps {
-  form: FormInstance; 
-}
-
-export function TaskFormActions({ form }: TaskFormActionsProps) {
+export function TaskFormActions() {
   const dispatch = useAppDispatch();
+  const editingTaskId = useAppSelector(selectEditingTaskId);
+  const isEditing = !!editingTaskId;
 
   const handleCancel = () => {
-    form.resetFields();
     dispatch(closeTaskForm());
   };
 
   return (
-    <Form.Item className="mb-0 flex justify-end space-x-2">
+    <div className="flex justify-end space-x-2">
       <Button onClick={handleCancel} className="mr-2">
         Cancel
       </Button>
       <Button type="primary" htmlType="submit">
-        Create Task
+        {isEditing ? "Update Task" : "Create Task"}
       </Button>
-    </Form.Item>
+    </div>
   );
 }
