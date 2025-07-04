@@ -3,13 +3,13 @@
 import { Row, Col, Typography } from "antd";
 import { TaskCard } from "./TaskCard";
 import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
-import { Task } from "@/types/task"; // Import Task type
+import { Task } from "@/types/task";
 
 const { Title } = Typography;
 
 interface TaskSectionProps {
   title: string;
-  tasks: Task[]; // Replace any[] with Task[]
+  tasks: Task[];
   count: number;
 }
 

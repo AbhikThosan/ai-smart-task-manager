@@ -33,7 +33,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={inter.className}
+        suppressHydrationWarning={true}
+        data-no-grammarly="true"
+        data-no-grammarly-extension="true"
+      >
         <ErrorBoundary>
           <AntdRegistry>
             <ConfigProvider

@@ -24,3 +24,10 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Prevent browser extensions from adding attributes */
+body[data-new-gr-c-s-check-loaded],
+body[data-gr-ext-installed] {
+  /* Reset any extension-added styles */
+  font-family: Arial, Helvetica, sans-serif !important;
+}

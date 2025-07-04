@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import {
   Task,
   TaskState,
@@ -112,32 +112,39 @@ export const selectIsLoading = (state: { tasks: TaskState }) =>
   state.tasks.isLoading;
 export const selectError = (state: { tasks: TaskState }) => state.tasks.error;
 
-export const selectFilteredTasks = (state: { tasks: TaskState }) => {
-  const { tasks, filters } = state.tasks;
-
-  let filteredTasks = [...tasks]; // Create a copy to avoid mutating state directly
-
-  if (filters.status !== "all") {
-    filteredTasks = filteredTasks.filter(
-      (task) => task.status === filters.status
-    );
-  }
-
-  filteredTasks.sort((a, b) => {
-    const aValue = a[filters.sortBy as keyof Task];
-    const bValue = b[filters.sortBy as keyof Task];
-
-    // Handle null values for dueDate
-    if (aValue === null && bValue === null) return 0;
-    if (aValue === null) return filters.sortOrder === "asc" ? 1 : -1;
-    if (bValue === null) return filters.sortOrder === "asc" ? -1 : 1;
-
-    if (filters.sortOrder === "asc") {
-      return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
-    } else {
-      return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+export const selectFilteredTasks = createSelector(
+  [selectTasks, selectFilters],
+  (tasks, filters) => {
+    // Early return for empty tasks
+    if (tasks.length === 0) {
+      return [];
     }
-  });
 
-  return filteredTasks;
-};
+    let filteredTasks = tasks;
+
+    if (filters.status !== "all") {
+      filteredTasks = tasks.filter((task) => task.status === filters.status);
+    }
+
+    // Only sort if we have tasks to sort
+    if (filteredTasks.length > 0) {
+      filteredTasks = [...filteredTasks].sort((a, b) => {
+        const aValue = a[filters.sortBy as keyof Task];
+        const bValue = b[filters.sortBy as keyof Task];
+
+        // Handle null values for dueDate
+        if (aValue === null && bValue === null) return 0;
+        if (aValue === null) return filters.sortOrder === "asc" ? 1 : -1;
+        if (bValue === null) return filters.sortOrder === "asc" ? -1 : 1;
+
+        if (filters.sortOrder === "asc") {
+          return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+        } else {
+          return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+        }
+      });
+    }
+
+    return filteredTasks;
+  }
+);
