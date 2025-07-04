@@ -246,3 +246,37 @@ The application includes comprehensive error handling:
 - API timeout handling (30 seconds)
 - Graceful fallbacks for AI failures
 - User-friendly error messages
+
+## 🎯 Challenges Faced
+
+### Technical Challenges
+
+1. **AI Integration Complexity**
+
+   - Implementing robust error handling for API failures
+   - Managing API rate limits and timeouts
+   - Creating fallback suggestions when AI is unavailable
+
+2. **State Management**
+
+   - Setting up Redux Toolkit with persistence
+   - Managing complex task state with filters and sorting
+   - Handling optimistic updates
+
+3. **UI/UX Design**
+
+   - Creating responsive design for mobile and desktop
+   - Implementing smooth animations and transitions
+   - Ensuring accessibility and usability
+
+4. **Next.js 15 Migration**
+   - Adapting to new App Router patterns
+   - Handling server-side rendering with client components
+   - Managing hydration issues
+
+### Solutions Implemented
+
+- **Robust Error Handling**: Comprehensive try-catch blocks with user-friendly fallbacks
+- **Loading States**: Skeleton screens and spinners for better UX
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Type Safety**: Full TypeScript implementation for better development experience
